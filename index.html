@@ -260,8 +260,45 @@
                 padding: 8px 12px;
             }
         }
+
+        /* สไตล์กระดาษ */
+        .paper {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            margin: 30px auto;
+            display: none;
+            position: relative;
+        }
+
+        /* ตัวอักษรพิมพ์เหมือนพิมพ์บนกระดาษ */
+        .typing-text {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid black;
+            width: 0;
+            animation: typing 5s steps(50) 1s forwards, blink 0.75s step-end infinite;
+        }
+
+        /* การพิมพ์ */
+        @keyframes typing {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* การกระพริบของเคอร์เซอร์ */
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -275,18 +312,18 @@
 
     <!-- นับเวลาถอยหลัง -->
     <div class="countdown" id="countdown">
-        10:00
+        5
     </div>
 
     <!-- หน้าเซอร์ไพรส์ -->
     <div class="surprise-page" id="surprisePage">
-        <h2>Surprise! 💖</h2>
+        <h2>Happy 6 month anniversary! 💖</h2>
         <button class="button" onclick="showMessage()">Click for Surprise</button>
     </div>
 
     <!-- ข้อความลอย -->
     <div class="floating-message" id="floatingMessage">
-        You're my world! 🌍💖
+        รักอ้วนต่ะเม๋อน่ะ! 🌍💖
     </div>
 
     <!-- ปุ่มเปิดแกลเลอรี่ -->
@@ -294,13 +331,20 @@
 
     <!-- แกลเลอรี่ -->
     <div class="gallery" id="gallery" style="display: none;">
-        <img src="https://via.placeholder.com/400/FFB6C1/FFFFFF?text=Image+1" alt="Image 1">
-        <img src="https://via.placeholder.com/400/FF69B4/FFFFFF?text=Image+2" alt="Image 2">
-        <img src="https://via.placeholder.com/400/FF80BF/FFFFFF?text=Image+3" alt="Image 3">
+        <img src="images/DSC01938.jpg" alt="Image 1">
+        <img src="images/38D3CDED-9261-43BB-AB9F-1B09027069A7.jpg" alt="Image 2">
+        <img src="images/5F67ADE0-6C64-479D-A2F4-9A56BB7E223B.jpg" alt="Image 3">
     </div>
 
     <!-- ปุ่มเปิดเพลง -->
     <button class="music-button" onclick="toggleMusic()">Play Music</button>
+
+    <!-- กระดาษที่จะพิมพ์ข้อความ -->
+    <div class="paper" id="paper">
+        <button class="close-button" onclick="closeMessage()">Close</button>
+        <div class="typing-text" id="typingText"></div>
+    </div>
+    
 
     <footer>
         Made with ❤️ for You
@@ -308,9 +352,9 @@
 
     <script>
         let countdownTimer;
-        let timeLeft = 600; // 10 minutes countdown in seconds
+        let timeLeft = 5; // 10 minutes countdown in seconds
         let musicPlaying = false;
-        let audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
+        let audio = new Audio('file:///C:/Users/Atichat/Downloads/BENT%20-%20%E0%B8%A3%E0%B8%81%E0%B9%81%E0%B8%9F%E0%B8%99%20[OFFICIAL%20MV]%20-%20Bz.%E3%83%99%E3%83%B3%E3%83%84.mp3');
         audio.loop = true;
 
         // ฟังก์ชันนับเวลาถอยหลัง
@@ -355,6 +399,12 @@
             setTimeout(() => {
                 message.style.display = 'none';
             }, 3000);
+
+            // แสดงข้อความบนกระดาษ
+            const paper = document.getElementById('paper');
+            const typingText = document.getElementById('typingText');
+            paper.style.display = 'block';
+            typingText.textContent = "สุขสันต์วันครบรอบ 6 m น่ะคะรักเสมอ! 💖อ้วนเก่งที่สุด!!";
         }
 
         // ฟังก์ชันเปิดแกลเลอรี่
@@ -372,6 +422,15 @@
                 audio.play();
                 musicPlaying = true;
             }
+        }
+
+        function closeMessage() {
+            const paper = document.getElementById('paper');
+            paper.style.display = 'none';
+        }
+
+        function answerQuestion() {
+            alert("Thank you for your answer!");
         }
     </script>
 
